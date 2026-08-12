@@ -30,7 +30,11 @@ export const CinematicFrameCanvas: React.FC<CinematicFrameCanvasProps> = ({
 
     const handleResize = () => {
       if (!canvas) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1 : 2);
+      const dpr = isReducedMotion
+        ? 1
+        : window.innerWidth < 768
+        ? Math.min(window.devicePixelRatio || 1, 1)
+        : Math.min(window.devicePixelRatio || 1, 2);
       const width = window.innerWidth;
       const height = window.innerHeight;
 
@@ -38,7 +42,6 @@ export const CinematicFrameCanvas: React.FC<CinematicFrameCanvasProps> = ({
       canvas.height = height * dpr;
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
-
       ctx.scale(dpr, dpr);
       lastRenderedIndex.current = -1; // Force redraw on resize
     };
