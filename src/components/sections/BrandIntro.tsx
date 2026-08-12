@@ -27,7 +27,7 @@ export const BrandIntro: React.FC = () => {
           </Reveal>
           <Reveal delay={240}>
             <div className="mt-10">
-              <Button as-link href="#automotive">
+              <Button to="/automotive">
                 Discover JOJO
               </Button>
             </div>

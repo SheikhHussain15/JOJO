@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { CinematicFrameCanvas } from "./CinematicFrameCanvas";
 import { CinematicOverlay } from "./CinematicOverlay";
 import { useScrollProgress } from "../../hooks/useScrollProgress";
@@ -74,12 +75,12 @@ export const CinematicHero: React.FC = () => {
                 Pioneering elite automotive excellence and heavy agricultural machinery solutions engineered for global performance.
               </p>
               <div className="flex items-center gap-4">
-                <a
-                  href="#automotive"
+                <Link
+                  to="/automotive"
                   className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-mono px-6 py-3 rounded-full bg-white text-[#08090d] hover:bg-[#c5a059] hover:text-white transition-all font-medium"
                 >
                   <span>Explore Portfolio</span>
-                </a>
+                </Link>
               </div>
             </div>
 

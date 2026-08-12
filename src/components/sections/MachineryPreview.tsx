@@ -41,7 +41,7 @@ export const MachineryPreview: React.FC = () => {
 
         <Reveal delay={200}>
           <div className="mt-16">
-            <Button href="#contact" variant="secondary">
+            <Button to="/machinery" variant="secondary">
               Explore Machinery
             </Button>
           </div>

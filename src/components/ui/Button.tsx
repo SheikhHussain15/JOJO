@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface ButtonProps {
   className?: string;
@@ -6,6 +7,7 @@ interface ButtonProps {
   size?: "sm" | "md" | "lg";
   onClick?: () => void;
   href?: string;
+  to?: string;
   disabled?: boolean;
   children: React.ReactNode;
 }
@@ -16,6 +18,7 @@ export const Button: React.FC<ButtonProps> = ({
   size = "md",
   onClick,
   href,
+  to,
   disabled = false,
   children,
 }) => {
@@ -70,6 +73,18 @@ export const Button: React.FC<ButtonProps> = ({
     ${sizeClasses[size]}
     ${className}
   `;
+
+  if (to) {
+    return (
+      <Link
+        to={to}
+        className={classes}
+        aria-disabled={disabled}
+      >
+        {children}
+      </Link>
+    );
+  }
 
   if (href) {
     return (

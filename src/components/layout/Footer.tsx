@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Container } from "./Container";
 import { company } from "../../data/company";
 
 const navLinks = [
-  { label: "Automotive", href: "#automotive" },
-  { label: "Machinery", href: "#machinery" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Automotive", to: "/automotive" },
+  { label: "Machinery", to: "/machinery" },
+  { label: "About", to: "/#about" },
+  { label: "Contact", to: "/#contact" },
 ];
 
 export const Footer: React.FC = () => {
@@ -34,10 +35,10 @@ export const Footer: React.FC = () => {
             <h4 className="text-zinc-400 uppercase tracking-[0.2em] text-xs font-medium mb-4">Navigation</h4>
             <ul className="space-y-3 text-zinc-400 text-sm">
               {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a href={link.href} className="hover:text-[#c5a059] transition-colors">
+                <li key={link.to}>
+                  <Link to={link.to} className="hover:text-[#c5a059] transition-colors">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
