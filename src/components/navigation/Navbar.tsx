@@ -1,25 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState<string | null>(null);
+  const scrollRef = useRef<number>(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScroll = window.scrollY;
+      setIsScrolled(currentScroll > 50);
+      scrollRef.current = currentScroll;
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Determine active link based on scroll position
+  useEffect(() => {
+    const sections = ['#automotive', '#machinery', '#about', '#contact'];
+    const handleScroll = () => {
+      const current = scrollRef.current;
+      let lastSection: string | null = null;
+      let maxOffset = 0;
+
+      sections.forEach(section => {
+        const element = document.querySelector(section) as HTMLElement | null;
+        if (element) {
+          const offset = element.offsetTop - 100;
+          if (current >= offset && current - offset > maxOffset) {
+            maxOffset = current - offset;
+            lastSection = section;
+          }
+        }
+      });
+
+      if (activeLink !== lastSection) {
+        setActiveLink(lastSection);
+      }
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [activeLink]);
+
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        isScrolled
-          ? "bg-[#08090d]/80 backdrop-blur-md border-b border-white/10 py-4 shadow-2xl"
-          : "bg-transparent py-6"
-      }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "bg-[#08090d]/70 backdrop-blur-md border2 border-white/5/ box-shadow: 0 4px 20px rgba(0,0,0,0.3)" : "bg-transparent py-6"}`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Brand Logo */}
@@ -34,10 +62,30 @@ export const Navbar: React.FC = () => {
 
         {/* Desktop Nav Links */}
         <nav className="hidden md:flex items-center gap-8 text-sm uppercase tracking-[0.2em] font-medium text-zinc-300">
-          <a href="#automotive" className="hover:text-[#c5a059] transition-colors">Automotive</a>
-          <a href="#machinery" className="hover:text-[#c5a059] transition-colors">Machinery</a>
-          <a href="#global" className="hover:text-[#c5a059] transition-colors">Global Vision</a>
-          <a href="#about" className="hover:text-[#c5a059] transition-colors">About</a>
+          <a
+            href="#automotive"
+            className={activeLink === "#automotive" ? "font-semibold text-[#c5a059]" : "hover:text-[#c5a059] transition-colors"}
+          >
+            Automotive
+          </a>
+          <a
+            href="#machinery"
+            className={activeLink === "#machinery" ? "font-semibold text-[#c5a059]" : "hover:text-[#c5a059] transition-colors"}
+          >
+            Machinery
+          </a>
+          <a
+            href="#about"
+            className={activeLink === "#about" ? "font-semibold text-[#c5a059]" : "hover:text-[#c5a059] transition-colors"}
+          >
+            About
+          </a>
+          <a
+            href="#contact"
+            className={activeLink === "#contact" ? "font-semibold text-[#c5a059]" : "hover:text-[#c5a059] transition-colors"}
+          >
+            Contact
+          </a>
         </nav>
 
         {/* Action CTA */}
@@ -54,7 +102,7 @@ export const Navbar: React.FC = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-white p-2 focus:outline-none"
+          className="md:hidden text-white p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#c5a059]"
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -67,35 +115,28 @@ export const Navbar: React.FC = () => {
           <a
             href="#automotive"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-lg uppercase tracking-[0.2em] text-zinc-200 hover:text-[#c5a059]"
+            className="text-lg uppercase tracking-[0.2em] text-zinc-200 hover:text-[#c5a059] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#c5a059]"
           >
             Automotive
           </a>
           <a
             href="#machinery"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-lg uppercase tracking-[0.2em] text-zinc-200 hover:text-[#c5a059]"
+            className="text-lg uppercase tracking-[0.2em] text-zinc-200 hover:text-[#c5a059] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#c5a059]"
           >
             Machinery
           </a>
           <a
-            href="#global"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-lg uppercase tracking-[0.2em] text-zinc-200 hover:text-[#c5a059]"
-          >
-            Global Vision
-          </a>
-          <a
             href="#about"
             onClick={() => setMobileMenuOpen(false)}
-            className="text-lg uppercase tracking-[0.2em] text-zinc-200 hover:text-[#c5a059]"
+            className="text-lg uppercase tracking-[0.2em] text-zinc-200 hover:text-[#c5a059] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#c5a059]"
           >
             About
           </a>
           <a
             href="#contact"
             onClick={() => setMobileMenuOpen(false)}
-            className="inline-flex items-center justify-center gap-2 text-sm uppercase tracking-[0.2em] font-mono px-6 py-3 rounded-full border border-[#c5a059] text-[#c5a059]"
+            className="inline-flex items-center justify-center gap-2 text-sm uppercase tracking-[0.2em] font-mono px-6 py-3 rounded-full border border-[#c5a059] text-[#c5a059] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#c5a059]"
           >
             <span>Inquiries</span>
             <ArrowUpRight className="w-4 h-4" />
@@ -105,3 +146,5 @@ export const Navbar: React.FC = () => {
     </header>
   );
 };
+
+export default Navbar;

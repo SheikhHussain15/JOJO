@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { Navbar } from "./components/navigation/Navbar";
 import { CinematicHero } from "./components/cinematic/CinematicHero";
-import { NextSection } from "./components/sections/NextSection";
+import { BrandIntro } from "./components/sections/BrandIntro";
+import { AutomotiveSection } from "./components/sections/AutomotiveSection";
+import { MachineryPreview } from "./components/sections/MachineryPreview";
+import { WhyJojo } from "./components/sections/WhyJojo";
+import { CompanyStory } from "./components/sections/CompanyStory";
+import { VisionSection } from "./components/sections/VisionSection";
+import { MissionSection } from "./components/sections/MissionSection";
+import { CtaSection } from "./components/sections/CtaSection";
+import { ContactTeaser } from "./components/sections/ContactTeaser";
+import { Footer } from "./components/layout/Footer";
 import { Preloader } from "./components/ui/Preloader";
 
 export function App() {
@@ -13,8 +22,17 @@ export function App() {
       <Navbar />
       <main>
         <CinematicHero />
-        <NextSection />
+        <BrandIntro />
+        <AutomotiveSection />
+        <MachineryPreview />
+        <WhyJojo />
+        <CompanyStory />
+        <VisionSection />
+        <MissionSection />
+        <CtaSection />
+        <ContactTeaser />
       </main>
+      <Footer />
     </div>
   );
 }

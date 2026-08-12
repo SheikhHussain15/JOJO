@@ -27,8 +27,8 @@ export const CinematicHero: React.FC = () => {
   }, [isReducedMotion]);
 
   // Text opacity and transform calculated from scroll progress
-  const textOpacity = Math.max(0, 1 - scrollProgress * 2.5);
-  const textTranslateY = scrollProgress * -50;
+  const textOpacity = isReducedMotion ? 1 : Math.max(0, 1 - scrollProgress * 2.5);
+  const textTranslateY = isReducedMotion ? 0 : scrollProgress * -50;
 
   return (
     <div ref={containerRef} className="relative w-full h-[400vh] bg-[#08090d]">
