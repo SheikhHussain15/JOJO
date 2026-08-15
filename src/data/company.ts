@@ -53,6 +53,7 @@ export interface CompanyData {
     office: string;
     email: string;
     phone: string;
+    locationNote: string;
   };
 }
 
@@ -130,5 +131,7 @@ export const company: CompanyData = {
     office: "JOJO International",
     email: "contact@jojo-international.com",
     phone: "+1 (555) 123-4567",
+    locationNote:
+      "Headquartered in the United States. Exact office location is shared directly on request.",
   },
 };

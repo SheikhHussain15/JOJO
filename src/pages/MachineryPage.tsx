@@ -8,10 +8,18 @@ import { Container } from "../components/layout/Container";
 import { Reveal } from "../components/ui/Reveal";
 import { machineryProducts, getFeaturedProducts } from "../data/machinery";
 import { MACHINERY_CATEGORIES } from "../types/machinery";
+import { usePageMeta } from "../lib/seo";
 
 export const MachineryPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [searchTerm, setSearchTerm] = useState<string>("");
+
+  usePageMeta({
+    title: "Machinery — JOJO International",
+    description:
+      "Explore JOJO International's agricultural and industrial machinery — equipment engineered to work hard, backed by consistent standards.",
+    path: "/machinery",
+  });
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};

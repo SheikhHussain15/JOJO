@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# Environment variables — never commit real secrets
+.env
+.env.*
+!.env.example
+
+# Local API dev sink (Phase 6) — never ship uploads/outbox
+server/.data/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -26,7 +26,7 @@ export const CtaSection: React.FC = () => {
             </p>
           </Reveal>
           <Reveal delay={240}>
-            <Button href="#contact" size="lg">
+            <Button to="/contact" size="lg">
               {cta.button}
             </Button>
           </Reveal>

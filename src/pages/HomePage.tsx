@@ -9,8 +9,15 @@ import { VisionSection } from "../components/sections/VisionSection";
 import { MissionSection } from "../components/sections/MissionSection";
 import { CtaSection } from "../components/sections/CtaSection";
 import { ContactTeaser } from "../components/sections/ContactTeaser";
+import { usePageMeta, SITE_DEFAULT_TITLE, SITE_DEFAULT_DESCRIPTION } from "../lib/seo";
 
 export const HomePage: React.FC = () => {
+  usePageMeta({
+    title: SITE_DEFAULT_TITLE,
+    description: SITE_DEFAULT_DESCRIPTION,
+    path: "/",
+  });
+
   return (
     <>
       <CinematicHero />

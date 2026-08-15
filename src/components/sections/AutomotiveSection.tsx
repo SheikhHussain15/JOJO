@@ -33,7 +33,7 @@ export const AutomotiveSection: React.FC = () => {
             <p className="text-zinc-400 font-light text-lg leading-relaxed mb-10 max-w-xl">
               {automotive.description}
             </p>
-            <Button href="#contact" variant="secondary">
+            <Button to="/automotive" variant="secondary">
               {automotive.cta}
             </Button>
           </Reveal>

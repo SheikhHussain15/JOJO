@@ -135,7 +135,7 @@ export const CinematicFrameCanvas: React.FC<CinematicFrameCanvasProps> = ({
   }, [isReducedMotion]);
 
   return (
-    <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+    <div aria-hidden="true" className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
       <canvas ref={canvasRef} className="block w-full h-full" />
     </div>
   );

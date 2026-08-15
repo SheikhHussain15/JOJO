@@ -5,9 +5,16 @@ import { Button } from "../components/ui/Button";
 import { Reveal } from "../components/ui/Reveal";
 import { company } from "../data/company";
 import heroImage from "../assets/hero.png";
+import { usePageMeta } from "../lib/seo";
 
 export const AutomotivePage: React.FC = () => {
   const { automotive, name } = company;
+
+  usePageMeta({
+    title: "Automotive — JOJO International",
+    description: automotive.description,
+    path: "/automotive",
+  });
 
   return (
     <>
@@ -61,7 +68,7 @@ export const AutomotivePage: React.FC = () => {
                   We combine sales capability with marketing reach — sourcing the right vehicles and connecting them with the right customers, built on long-term relationships.
                 </p>
                 <div className="pt-6">
-                  <Button href="/contact">Discuss Your Requirement</Button>
+                  <Button to="/contact">Discuss Your Requirement</Button>
                 </div>
               </div>
             </Reveal>

@@ -6,8 +6,9 @@ import { company } from "../../data/company";
 const navLinks = [
   { label: "Automotive", to: "/automotive" },
   { label: "Machinery", to: "/machinery" },
-  { label: "About", to: "/#about" },
-  { label: "Contact", to: "/#contact" },
+  { label: "About", to: "/about" },
+  { label: "Careers", to: "/careers" },
+  { label: "Contact", to: "/contact" },
 ];
 
 export const Footer: React.FC = () => {
@@ -71,8 +72,8 @@ export const Footer: React.FC = () => {
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-400 text-sm">
           <p>© JOJO International</p>
           <div className="flex gap-6">
-            <a href="#privacy" className="hover:text-[#c5a059] transition-colors">Privacy</a>
-            <a href="#terms" className="hover:text-[#c5a059] transition-colors">Terms</a>
+            <Link to="/privacy" className="hover:text-[#c5a059] transition-colors">Privacy</Link>
+            <Link to="/terms" className="hover:text-[#c5a059] transition-colors">Terms</Link>
           </div>
         </div>
 

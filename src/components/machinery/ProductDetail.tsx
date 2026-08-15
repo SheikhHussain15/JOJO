@@ -84,7 +84,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                 {product.specifications.map((spec) => (
                   <div key={spec.label} className="flex justify-between gap-6 px-6 py-4 bg-[#12141c]">
                     <dt className="text-zinc-500 font-light">{spec.label}</dt>
-                    <dd className="text-white font-light text-right">{spec.value}</dd>
+                    <dd className="text-white font-light text-right break-words">{spec.value}</dd>
                   </div>
                 ))}
               </dl>

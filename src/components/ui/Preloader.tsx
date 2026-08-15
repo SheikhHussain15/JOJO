@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { frameLoader } from "../../lib/FrameLoader";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 interface PreloaderProps {
   onComplete: () => void;
@@ -8,8 +9,17 @@ interface PreloaderProps {
 export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const isReducedMotion = useReducedMotion();
 
   useEffect(() => {
+    // Respect prefers-reduced-motion: skip the loader sequence entirely.
+    if (isReducedMotion) {
+      setProgress(100);
+      setIsLoaded(true);
+      onComplete();
+      return;
+    }
+
     let isCancelled = false;
 
     const load = async () => {
@@ -54,13 +64,15 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     return () => {
       isCancelled = true;
     };
-  }, [onComplete]);
+  }, [isReducedMotion, onComplete]);
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#08090d] text-white transition-opacity duration-700 ${
+      className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#08090d] text-white transition-opacity duration-700 motion-reduce:transition-none ${
         isLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
+      role="status"
+      aria-live="polite"
     >
       <div className="w-80 max-w-[80vw] flex flex-col items-center">
         <span className="text-2xl font-bold tracking-[0.3em] font-mono mb-2 text-white">

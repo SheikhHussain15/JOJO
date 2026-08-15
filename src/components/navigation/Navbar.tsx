@@ -5,8 +5,9 @@ import { Menu, X, ArrowUpRight } from "lucide-react";
 const desktopLinks = [
   { label: "Automotive", to: "/automotive" },
   { label: "Machinery", to: "/machinery" },
-  { label: "About", to: "/#about" },
-  { label: "Contact", to: "/#contact" },
+  { label: "About", to: "/about" },
+  { label: "Careers", to: "/careers" },
+  { label: "Contact", to: "/contact" },
 ];
 
 export const Navbar: React.FC = () => {
@@ -26,6 +27,16 @@ export const Navbar: React.FC = () => {
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname, location.hash]);
+
+  // Close mobile menu on Escape
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     `transition-colors ${
@@ -68,7 +79,7 @@ export const Navbar: React.FC = () => {
         {/* Action CTA */}
         <div className="hidden md:flex items-center gap-4">
           <Link
-            to="/#contact"
+            to="/contact"
             className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-mono px-5 py-2.5 rounded-full border border-white/20 text-white hover:border-[#c5a059] hover:text-[#c5a059] transition-all"
           >
             <span>Inquiries</span>
@@ -82,6 +93,7 @@ export const Navbar: React.FC = () => {
           className="md:hidden text-white p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#c5a059]"
           aria-label="Toggle menu"
           aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -89,7 +101,10 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-[#08090d]/95 backdrop-blur-xl border-b border-white/10 py-8 px-6 flex flex-col gap-6 md:hidden shadow-2xl">
+        <div
+          id="mobile-menu"
+          className="absolute top-full left-0 w-full bg-[#08090d]/95 backdrop-blur-xl border-b border-white/10 py-8 px-6 flex flex-col gap-6 md:hidden shadow-2xl"
+        >
           {desktopLinks.map((link) => (
             <Link
               key={link.to}
@@ -100,7 +115,7 @@ export const Navbar: React.FC = () => {
             </Link>
           ))}
           <Link
-            to="/#contact"
+            to="/contact"
             className="inline-flex items-center justify-center gap-2 text-sm uppercase tracking-[0.2em] font-mono px-6 py-3 rounded-full border border-[#c5a059] text-[#c5a059] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#c5a059]"
           >
             <span>Inquiries</span>

@@ -4,10 +4,21 @@ import { ProductDetail } from "../components/machinery/ProductDetail";
 import { Container } from "../components/layout/Container";
 import { Button } from "../components/ui/Button";
 import { getProductBySlug } from "../data/machinery";
+import { usePageMeta } from "../lib/seo";
 
 export const MachineryDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const product = slug ? getProductBySlug(slug) : undefined;
+
+  usePageMeta({
+    title: product
+      ? `${product.name} — JOJO International`
+      : "Product Not Found — JOJO International",
+    description: product
+      ? product.description
+      : "The machinery you're looking for isn't listed in the catalog right now.",
+    path: `/machinery/${slug ?? ""}`,
+  });
 
   if (!product) {
     return (
@@ -23,7 +34,7 @@ export const MachineryDetailPage: React.FC = () => {
             <Button href="/machinery" variant="secondary">
               Browse Machinery
             </Button>
-            <Button href="/contact">Request Information</Button>
+            <Button to="/contact">Request Information</Button>
           </div>
         </div>
       </Container>
