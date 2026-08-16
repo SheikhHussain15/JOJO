@@ -11,14 +11,16 @@ node_modules
 dist
 dist-ssr
 *.local
+.next
+out
 
 # Environment variables — never commit real secrets
 .env
 .env.*
 !.env.example
 
-# Local API dev sink (Phase 6) — never ship uploads/outbox
-server/.data/
+# Local API dev sink — never ship uploads/outbox
+packages/backend/.data/
 
 # Editor directories and files
 .vscode/*
