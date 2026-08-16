@@ -1,32 +1,43 @@
-# React + TypeScript + Vite
+# JOJO International
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Corporate website for JOJO International (automotive & industrial machinery) as an
+npm-workspaces monorepo.
 
-Currently, two official plugins are available:
+## Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```
+JOJO/
+├─ packages/
+│  ├─ frontend/   # Next.js 16 (App Router) website
+│  └─ backend/    # Express API (contact & careers endpoints)
+├─ docs/          # Implementation plans, phase reports, migration guides
+├─ package.json   # Workspace root — orchestration scripts
+└─ README.md
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Quick start
+
+```bash
+npm install        # installs all workspaces (hoisted to root)
+npm run dev        # starts backend (:4000) + frontend (:3000) together
+```
+
+Frontend dev proxies `/api/*` to the backend automatically (see
+`packages/frontend/next.config.ts`).
+
+## Scripts (root)
+
+| Command          | Description                                  |
+| :--------------- | :------------------------------------------- |
+| `npm run dev`    | Backend + frontend together                  |
+| `npm run build`  | Production build of the frontend             |
+| `npm run start`  | Serve the built frontend                     |
+| `npm run lint`   | Lint frontend + typecheck backend            |
+| `npm run test`   | Backend API test suite (20 checks)           |
+| `npm run typecheck` | Typecheck the backend package             |
+
+## Environment
+
+Copy the relevant `.env.example` into `.env.local` (frontend) / `.env`
+(backend). See `packages/backend/README.md` for backend delivery options
+(`FORM_DELIVERY_URL`, recipients, resume size).

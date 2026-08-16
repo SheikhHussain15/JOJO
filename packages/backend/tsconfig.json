@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["esnext"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "moduleDetection": "force",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts", "scripts/**/*.ts"]
+}
